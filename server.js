@@ -9,7 +9,7 @@ const register = require("./UserTransactions/register");
 const auth = require("./UserTransactions/auth");
 ///
 mongoose.set("strictQuery", true);
-
+console.log(process.env.DBUSERNAME);
 mongoose
   .connect(
     `mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASS}@lojipasscluster.sw6j53u.mongodb.net/lojipass?retryWrites=true&w=majority`
