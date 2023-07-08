@@ -12,7 +12,7 @@ mongoose.set("strictQuery", true);
 
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASS}@cluster0.1qncwqx.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASS}@lojipass.6sgmx8a.mongodb.net/?retryWrites=true&w=majority`
   )
   .then(() => console.log("Now connected to MongoDB!"))
   .catch((err) => console.error("Something went wrong", err));
