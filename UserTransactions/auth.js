@@ -1,4 +1,20 @@
-const Joi = require("joi");
+const Joi = require("joi").defaults((schema) =>
+  schema.options({
+    messages: {
+      en: {
+        "string.empty": "Alan boş olamaz {{#error}} ",
+        "number.base": "{{#label}} değeri sayı olmalıdır",
+        "any.invalid": "{{#label}} değeri geçersizdir",
+        "phoneNumber.invalid": "{{#label}} değeri geçersizdir",
+        "array.unique": "{{#label}} değeri benzersiz olmalıdır",
+        "string.min": "{{#label}} en az {{#limit}} karakter olmalıdır",
+        "string.max": "{{#label}} en fazla {{#limit}} karakter olmalıdır",
+        "string.email": "Geçersiz email adresi",
+        "string.pattern.base": "Geçersiz {{#label}}",
+      },
+    },
+  })
+);
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
@@ -14,11 +30,11 @@ router.post("/", async (req, res) => {
   }
   let user = await User.findOne({ email: req.body.email });
   if (!user) {
-    return res.status(400).send("Incorrect email or password.");
+    return res.status(400).send("Kullanıcı adı veya şifre hatalı");
   }
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
-    return res.status(400).send("Incorrect email or password.");
+    return res.status(400).send("Kullanıcı adı veya şifre hatalı");
   }
   const token = jwt.sign({ _id: user._id }, process.env.PRIVATEKEY);
   res.send({
