@@ -1,7 +1,7 @@
 const Joi = require("joi").defaults((schema) =>
   schema.options({
     messages: {
-      en: {
+      tr: {
         "string.empty": "Alan boş olamaz {{#error}} ",
         "number.base": "{{#label}} değeri sayı olmalıdır",
         "any.invalid": "{{#label}} değeri geçersizdir",
@@ -56,7 +56,7 @@ function validate(req) {
     password: Joi.string().min(6).required(),
   });
 
-  return schema.validate(req);
+  return schema.validate(req, { errors: { language: "tr" } });
 }
 
 module.exports = router;
